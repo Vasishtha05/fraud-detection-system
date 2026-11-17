@@ -1,0 +1,3 @@
+Confusion Matrix - HistGradientBoosting
+[[1174794   96087]
+ [    193    1450]]

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FraudGuard | Fraud Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h2>🛡 FraudGuard</h2>
+            <p class="sidebar-subtitle">Fraud Detection System</p>
+
+            <nav>
+                <a class="active" href="#dashboard">▦ Dashboard</a>
+                <a href="#analyze">⚡ Analyze Transaction</a>
+                <a href="#history">▤ Prediction History</a>
+
+                <div class="nav-divider"></div>
+
+                <a href="http://localhost:5000"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    ◉ MLflow Tracking ↗
+                </a>
+
+                <a href="http://localhost:8000/docs"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    ⌘ Swagger API ↗
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span> API connection
+                <p id="apiStatus">Checking connection...</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content" id="dashboard">
+
+            <!-- HEADER -->
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">MACHINE LEARNING OPERATIONS</p>
+                    <h1>Fraud Detection Dashboard</h1>
+                    <p class="muted">
+                        Monitor transactions and assess fraud risk.
+                    </p>
+                </div>
+
+                <button id="refreshBtn" class="secondary-btn">
+                    ↻ Refresh
+                </button>
+            </header>
+
+            <!-- STATISTICS -->
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <p>Total Predictions</p>
+                    <h2 id="totalPredictions">—</h2>
+                    <span>Saved prediction records</span>
+                </article>
+
+                <article class="stat-card">
+                    <p>Fraud Alerts</p>
+                    <h2 id="fraudCount">—</h2>
+                    <span>Predictions classified as fraud</span>
+                </article>
+
+                <article class="stat-card">
+                    <p>Legitimate</p>
+                    <h2 id="legitimateCount">—</h2>
+                    <span>Predictions classified as legitimate</span>
+                </article>
+
+            </section>
+
+            <!-- TRANSACTION ANALYSIS -->
+            <section class="panel" id="analyze">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Analyze a Transaction</h2>
+                        <p class="muted">
+                            Submit transaction details to the trained ML model.
+                        </p>
+                    </div>
+
+                    <span class="tag">LIVE API</span>
+                </div>
+
+                <form id="predictionForm">
+
+                    <div class="form-grid">
+
+                        <label>
+                            Transaction step
+                            <input
+                                type="number"
+                                id="step"
+                                value="10"
+                                min="0"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Transaction type
+                            <select id="type" required>
+                                <option value="TRANSFER">TRANSFER</option>
+                                <option value="CASH_OUT">CASH_OUT</option>
+                                <option value="PAYMENT">PAYMENT</option>
+                                <option value="CASH_IN">CASH_IN</option>
+                                <option value="DEBIT">DEBIT</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Transaction amount
+                            <input
+                                type="number"
+                                id="amount"
+                                value="5000"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Flagged by existing system?
+                            <select id="flagged">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </label>
+
+                    </div>
+
+                    <button
+                        class="primary-btn"
+                        type="submit"
+                        id="analyzeBtn"
+                    >
+                        Analyze Transaction →
+                    </button>
+
+                </form>
+
+                <div
+                    id="predictionResult"
+                    class="result-box hidden"
+                    aria-live="polite">
+                </div>
+
+            </section>
+
+            <!-- PREDICTION HISTORY -->
+            <section class="panel" id="history">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Recent Predictions</h2>
+                        <p class="muted">
+                            Latest records returned by the database API.
+                        </p>
+                    </div>
+
+                    <span class="tag">SQLITE</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Record ID</th>
+                                <th>Step</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Fraud Probability</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="historyBody">
+                            <tr>
+                                <td colspan="6">
+                                    Loading prediction history...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+            <footer>
+                FraudGuard · Academic MLOps Project ·
+                Model predictions are estimates, not guarantees.
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
