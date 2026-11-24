@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# MLflow and SQLite local runs
+mlruns/
+mlflow.db
+*.db
+*.db-journal
+
+# Data folder (contains 470MB raw dataset)
+data/
+
+# Operating System files
+.DS_Store
+Thumbs.db
